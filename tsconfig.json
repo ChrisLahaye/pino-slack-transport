@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    /* Generate .d.ts files from TypeScript and JavaScript files in your project. */
+    "declaration": true,
+    /* Specify a set of bundled library declaration files that describe the target runtime environment. */
+    "lib": ["ES2015"],
+    /* Specify what module code is generated. */
+    "module": "commonjs",
+    /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ES2015",
+    /* Enable all strict type checking options. */
+    "strict": true,
+  },
+  "include": ["lib/**/*"],
+  "exclude": ["node_modules"]
+}
