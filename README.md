@@ -3,6 +3,8 @@
 [![npm downloads](https://img.shields.io/npm/dm/pino-slack-transport.svg)](https://www.npmjs.com/package/pino-slack-transport)
 [![Known Vulnerabilities](https://snyk.io/test/github/chrislahaye/pino-slack-transport/badge.svg)](https://snyk.io/test/github/chrislahaye/pino-slack-transport)
 
+This module provides a 'transport' for [pino](https://www.npmjs.com/package/pino) that sends logs to Slack.
+
 ## Install
 
 ```ts
