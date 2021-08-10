@@ -1,4 +1,5 @@
 import { Writable } from 'stream'
+import * as build from 'pino-abstract-transport'
 import * as https from 'https'
 import fetch from 'node-fetch'
 
@@ -58,7 +59,7 @@ const flatten = (
 
 interface Args {
   agent?: https.Agent
-  log: string
+  log: Record<string, any>
   options: Options
 }
 const process = async ({
@@ -72,7 +73,7 @@ const process = async ({
     webhookUrl
   }
 }: Args): Promise<void> => {
-  const { [messageKey]: msg, time, level, ...bindings } = JSON.parse(log)
+  const { [messageKey]: msg, time, level, ...bindings } = log
 
   const payload: any = {
     blocks: []
@@ -119,24 +120,21 @@ const process = async ({
   })
 }
 
-export const createTransport = function (options: Options): Writable {
+export const createTransport = (options: Options): Writable => {
   const agent = options.keepAlive === true
     ? new https.Agent({ keepAlive: true })
     : undefined
 
-  return new Writable({
-    write (chunk, _enc, cb) {
-      const logs = chunk.toString().split('\n\n')
-
-      for (const log of logs) {
-        // eslint-disable-next-line no-void
-        void process({
+  return build(async (iterable: Iterable<Record<string, any>>) => {
+    for await (const log of iterable) {
+      try {
+        await process({
           agent,
           log,
           options
         })
-          .catch((reason) => console.error(reason))
-          .then(() => cb())
+      } catch (err) {
+        console.error(err)
       }
     }
   })

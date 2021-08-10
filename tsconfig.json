@@ -6,10 +6,12 @@
     "lib": ["ES2015"],
     /* Specify what module code is generated. */
     "module": "commonjs",
-    /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
-    "target": "ES2015",
     /* Enable all strict type checking options. */
     "strict": true,
+    /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */
+    "target": "ES2015",
+    /* Specify multiple folders that act like ./node_modules/@types. */
+    "typeRoots" : ["./typings", "./node_modules/@types"]
   },
   "include": ["lib/**/*"],
   "exclude": ["node_modules"]
