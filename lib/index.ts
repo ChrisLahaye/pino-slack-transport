@@ -43,6 +43,12 @@ export interface Options {
   webhookUrl: string
 }
 
+interface Args {
+  agent?: https.Agent
+  log: Record<string, any>
+  options: Options
+}
+
 const DEFAULT_COLORS = { 30: '#2EB67D', 40: '#ECB22E', 50: '#E01E5A', 60: '#E01E5A' }
 const DEFAULT_EXCLUDED_KEYS = { hostname: 0, pid: 0 }
 const DEFAULT_MESSAGE_KEY = 'msg'
@@ -57,11 +63,6 @@ const flatten = (
   }), {})
 }
 
-interface Args {
-  agent?: https.Agent
-  log: Record<string, any>
-  options: Options
-}
 const process = async ({
   agent,
   log,
