@@ -7,7 +7,7 @@ This module provides a 'transport' for [pino](https://www.npmjs.com/package/pino
 
 ## Install
 
-```ts
+```shell
 yarn install pino-slack-transport
 ```
 
