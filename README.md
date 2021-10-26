@@ -68,6 +68,10 @@ Default: `{ hostname: 0, pid: 0 }`
 
 The string keys excluded from the JSON object.
 
+### `imageUrlKey`
+
+The string key for the image URL in the JSON object.
+
 ### `keepAlive`
 
 Keep sockets around so they can be used for future requests without having to reestablish a TCP connection.

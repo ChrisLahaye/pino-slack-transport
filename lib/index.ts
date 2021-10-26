@@ -26,6 +26,11 @@ export interface Options {
   excludedKeys?: Record<string, any>
 
   /**
+   * The string key for the image URL in the JSON object.
+   */
+  imageUrlKey?: string
+
+  /**
    * Keep sockets around so they can be used for future requests without having to reestablish a TCP connection.
    */
   keepAlive?: boolean
@@ -70,6 +75,7 @@ const process = async ({
     channelKey,
     colors = DEFAULT_COLORS,
     excludedKeys = DEFAULT_EXCLUDED_KEYS,
+    imageUrlKey,
     messageKey = DEFAULT_MESSAGE_KEY,
     webhookUrl
   }
@@ -105,11 +111,13 @@ const process = async ({
     value,
     short: value.length < 500
   }))
+  const imageUrl = typeof imageUrlKey === 'string' ? bindings[imageUrlKey] : undefined
 
-  if (fields.length > 0) {
+  if (fields.length > 0 || typeof imageUrl === 'string') {
     payload.attachments = [{
       color: colors[level],
-      fields
+      fields,
+      image_url: imageUrl
     }]
   }
 
