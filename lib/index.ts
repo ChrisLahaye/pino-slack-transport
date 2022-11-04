@@ -91,10 +91,11 @@ const process = async ({
   }
 
   if (typeof msg === 'string') {
-    payload.text = msg
+    const text = msg.length <= 2500? msg : `${msg.substring(0, 2500)}...`;
+    payload.text = text
     payload.blocks.push({
       type: 'section',
-      text: { type: 'mrkdwn', text: `\`\`\`${msg}\`\`\`` }
+      text: { type: 'mrkdwn', text: `\`\`\`${text}\`\`\`` }
     })
   }
 
